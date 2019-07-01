@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.abu.abupro">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Bugly -->
+
+
+    <!-- 基础模块（必须加入以下声明）START -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- 基础模块 END -->
+    <application
+        android:name=".app.AndroidPlusApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/leaf_pic"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 配置APP渠道号 -->
+        <meta-data
+            android:name="BUGLY_APP_CHANNEL"
+            android:value="${CHANNEL_VALUE}" />
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentStatusBarTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentStatusBarTheme" />
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentStatusBarTheme" />
+        <activity
+            android:name=".ui.activity.AddQuestionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.QuestionDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activity.AddAnswerActivity" />
+        <activity
+            android:name=".ui.activity.AnswerDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activity.CommentActivity" />
+        <activity
+            android:name=".ui.activity.ShareArticleActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.ArticleDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentStatusBarTheme" />
+        <activity
+            android:name=".ui.activity.UserShareArticleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.UserQuestionsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.UserAnswerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.UserFavourArticleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.UserFavourQuestionActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.UserFavourAnswerActivity" />
+        <!-- 用户反馈模块Activity -->
+        <activity
+            android:name="com.avos.avoscloud.feedback.ThreadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/camera_provider_path" />
+        </provider>
+        <provider
+            android:name=".provider.BuglyProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/bugly_provider_path" />
+        </provider>
+        <provider
+            android:name=".provider.FeedbackProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/lc_file_provider_path" />
+        </provider>
+
+        <service
+            android:name="com.avos.avoscloud.PushService"
+            android:exported="true" />
+
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".PushActivity" />
+        <activity android:name=".ui.activity.WebViewActivity" />
+        <activity android:name=".ui.activity.TabManagerActivity"></activity>
+    </application>
+
+</manifest>
